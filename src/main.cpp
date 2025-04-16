@@ -1,21 +1,23 @@
-#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+
+#include "main.h"
+#include "Game.h"
 
 int main()
 {
 	// Create the main window
-	sf::RenderWindow window(sf::VideoMode({ 800, 600 }), "SFML window");
+	sf::RenderWindow window(sf::VideoMode({ WindowWidth, WindowHeight }), "Survidle");
+	window.setVerticalSyncEnabled(true);
 
-	// Load a sprite to display
-	//const sf::Texture texture("");
-	//sf::Sprite sprite(texture);
+	Game game(window);
 
-	// Create a graphical text to display
-	//const sf::Font font("arial.ttf");
-	//sf::Text text(font, "Hello SFML", 50);
+	sf::Clock clock;
 
 	// Start the game loop
 	while (window.isOpen())
 	{
+		sf::Time delta = clock.restart();
+
 		// Process events
 		while (const std::optional event = window.pollEvent())
 		{
@@ -24,16 +26,10 @@ int main()
 				window.close();
 		}
 
-		// Clear screen
-		window.clear();
+		game.update(delta.asSeconds());
 
-		// Draw the sprite
-		//window.draw(sprite);
-
-		// Draw the string
-		//window.draw(text);
-
-		// Update the window
+		window.clear(sf::Color::Black);
+		game.render();
 		window.display();
 	}
 }

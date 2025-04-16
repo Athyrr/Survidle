@@ -13,9 +13,6 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")
 # Force common exe location
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-# Headers
-include_directories(${CMAKE_SOURCE_DIR}/include)
-
 # SFML
 find_package(SFML 3.0 COMPONENTS System Window Graphics CONFIG REQUIRED)
 
