@@ -20,5 +20,5 @@ private:
 
 	Player player;
 
-	std::vector<Enemy> enemies;
+	std::vector<Enemy*>	enemies;
 };

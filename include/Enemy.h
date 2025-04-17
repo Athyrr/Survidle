@@ -1,17 +1,20 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "Player.h"
 
 class Enemy
 {
 public:
-	sf::CircleShape body;
-	float speed;
-
 	Enemy();
 	~Enemy();
 
-	void update(float delta,const sf::Vector2f& playerPosition);
-	void draw(sf::RenderWindow& window);
+	sf::CircleShape body;
+	float speed;
+	int health;
+
+	void update(float delta, const sf::Vector2f& playerPosition);
+	void draw(sf::RenderWindow& window) const;
+
+	bool takeDamage(int amount); //@todo set precalculate dmg amount
+	bool isDead() const;
 };
