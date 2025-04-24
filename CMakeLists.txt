@@ -10,12 +10,17 @@ add_subdirectory(deps/glm)
 add_subdirectory(deps/glfw)
 
 add_executable(${PROJECT_NAME} 
-    src/core/main.cpp 
-  "include/test.h")
+  src/core/main.cpp 
+  "include/test.h" 
+  "include/game.h" 
+  "include/inputHandler.h" 
+  "src/core/game.cpp" 
+  "src/core/inputHandler.cpp"
+)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/deps/bgfx.cmake/bgfx/examples/common)
-target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/deps/glm)
+#target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/deps/glm)
 #target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/deps/bgfx.cmake/bgfx/examples/common/entry)
 
 target_link_libraries(${PROJECT_NAME} 
