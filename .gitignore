@@ -1,7 +1,6 @@
 # build folders
 build/
 out/
-cmake-build-*/
 
 # Visual Studio files
 .vs/
@@ -10,9 +9,9 @@ cmake-build-*/
 *.sln
 
 # CMake 
-CMakeCache.txt
-CMakeFiles/
-CMakeSettings.json
+#CMakeCache.txt
+#CMakeFiles/
+#CMakeSettings.json
 
 # misc
 *.user
