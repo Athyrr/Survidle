@@ -10,7 +10,7 @@ add_subdirectory(deps/glfw)
 
 add_executable(${PROJECT_NAME} 
     src/main.cpp 
- )
+  "include/test.h")
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/deps/bgfx.cmake/bgfx/examples/common)
