@@ -6,6 +6,15 @@
 
 #include "Game.h"
 
+
+
+
+#include "nanovg/nanovg.h"
+#include "nanovg/nanovg_bgfx.h"
+
+
+
+
 #if BX_PLATFORM_LINUX
 #define GLFW_EXPOSE_NATIVE_X11
 #elif BX_PLATFORM_WINDOWS
@@ -17,6 +26,8 @@
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h>
 
+
+using namespace entities;
 
 static bool s_showStats = false;
 const bgfx::ViewId kClearView = 0;
@@ -76,9 +87,24 @@ void Game::init() {
 	bgfx::setViewClear(kClearView, BGFX_CLEAR_COLOR);
 	bgfx::setViewRect(kClearView, 0, 0, bgfx::BackbufferRatio::Equal);
 
+
+
+
+
+	auto vg = nvgCreate(1 /* BGFX_RENDERER_TYPE_COUNT */, 0); // Renderer autodetect
+	if (!vg)
+		fprintf(stderr, "Failed to init NanoVG.\n");
+
+
+	nvgBeginPath(vg);
+	nvgRect(vg, 100, 100, 120, 30);
+	nvgFillColor(vg, nvgRGBA(255, 192, 0, 255));
+	nvgFill(vg);
+
+
 	// Init Inputs and Player
 	Game::inputs = new InputHandler(window);
-	//@todo init player
+	//Game::player = new Player();
 }
 
 
@@ -105,7 +131,7 @@ void Game::run() {
 		bgfx::setDebug(s_showStats ? BGFX_DEBUG_STATS : BGFX_DEBUG_TEXT);
 
 		// Advance to next frame. Process submitted rendering primitives.
-		bgfx::frame();
+		bgfx::frame(); // Always last called
 	}
 
 	Game::exit();
@@ -113,7 +139,8 @@ void Game::run() {
 
 void Game::update(float delta) {
 	inputs->update(delta);
-	//Game::player->update(delta);
+
+	player->update(*inputs, delta);
 }
 
 void Game::render() {
@@ -129,12 +156,13 @@ void Game::render() {
 	// This dummy draw call is here to make sure that view 0 is cleared if no other draw calls are submitted to view 0.
 	bgfx::touch(kClearView);
 
+
 	//Game::player->render();
 }
 
 void Game::exit() {
 	delete Game::inputs;
-	//@todo delete Player
+	//delete Game::player;
 
 	bgfx::shutdown();
 	glfwDestroyWindow(window);

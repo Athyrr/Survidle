@@ -2,11 +2,13 @@
 
 #include <GLFW/glfw3.h>
 #include "InputHandler.h"
+#include "Player.h"
+
+using namespace entities;
 
 class Game {
 public:
 	Game() : window(nullptr), inputs(nullptr) {} //@todo palyer ref
-	
 	~Game() { exit(); };
 
 	void run();
@@ -19,8 +21,8 @@ private:
 
 	GLFWwindow* window = nullptr;
 
-	//player*
 	InputHandler* inputs = nullptr;
+	Player* player = nullptr;
 
 	int width = 1280;
 	int height = 720;
